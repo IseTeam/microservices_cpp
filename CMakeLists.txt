@@ -14,6 +14,8 @@ option(BUILD_TESTS "Build unit tests." ON)
 set(CMAKE_CXX_STANDARD 11)
 set(INCLUDE_DIR "${PROJECT_SOURCE_DIR}/include")
 set(SOURCE_DIR  "${PROJECT_SOURCE_DIR}/src")
+set(SOURCE_MODEL_DIR "${PROJECT_SOURCE_DIR}/src/model")
+set(SOURCE_DISCOVERY_DIR "${PROJECT_SOURCE_DIR}/src/discovery")
 
 # Windows MSVC 编译器
 if(CMAKE_CXX_COMPILER_ID STREQUAL MSVC)
@@ -38,4 +40,8 @@ if(BUILD_TESTS)
 endif()
 
 aux_source_directory(${SOURCE_DIR} ALL_SRC)
-add_executable(main ${ALL_SRC})
+aux_source_directory(${SOURCE_MODEL_DIR} MODEL_SRC)
+aux_source_directory(${SOURCE_DISCOVERY_DIR} DISCOVERY_SRC)
+add_executable(main ${ALL_SRC} ${MODEL_SRC} ${DISCOVERY_SRC})
+
+target_link_libraries(main mysqlclient)
