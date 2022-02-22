@@ -16,6 +16,7 @@ set(INCLUDE_DIR "${PROJECT_SOURCE_DIR}/include")
 set(SOURCE_DIR  "${PROJECT_SOURCE_DIR}/src")
 set(SOURCE_MODEL_DIR "${PROJECT_SOURCE_DIR}/src/model")
 set(SOURCE_DISCOVERY_DIR "${PROJECT_SOURCE_DIR}/src/discovery")
+set(SOURCE_LOADBALANCE_DIR "${PROJECT_SOURCE_DIR}/src/loadbalance")
 
 # Windows MSVC 编译器
 if(CMAKE_CXX_COMPILER_ID STREQUAL MSVC)
@@ -42,6 +43,7 @@ endif()
 aux_source_directory(${SOURCE_DIR} ALL_SRC)
 aux_source_directory(${SOURCE_MODEL_DIR} MODEL_SRC)
 aux_source_directory(${SOURCE_DISCOVERY_DIR} DISCOVERY_SRC)
-add_executable(main ${ALL_SRC} ${MODEL_SRC} ${DISCOVERY_SRC})
+aux_source_directory(${SOURCE_LOADBALANCE_DIR} LOADBALANCE_SRC)
+add_executable(main ${ALL_SRC} ${MODEL_SRC} ${DISCOVERY_SRC} ${LOADBALANCE_SRC})
 
 target_link_libraries(main mysqlclient)
