@@ -1,0 +1,75 @@
+#ifndef CHAIN_HPP
+#define CHAIN_HPP
+
+#include <map>
+#include <string>
+
+#include "./rule.hpp"
+#include "./ruleMap.hpp"
+
+namespace iptables {
+class Chain {
+ public:
+  /**
+   * @brief Construct a new Chain object
+   *
+   */
+  Chain() {}
+
+  /**
+   * @brief Destroy the Chain object
+   *
+   */
+  ~Chain() {}
+
+  /**
+   * @brief Add a rule to the chain
+   *
+   * @param rule    The rule object
+   */
+  void addRuleToChain(Rule& rule);
+
+  /**
+   * @brief Insert rule into chain
+   *
+   * @param ruleNum The rule number
+   * @param rule    The rule
+   */
+  void insertRuleIntoChain(unsigned int ruleNum, Rule& rule);
+
+  /**
+   * @brief Delete rule from the chain
+   *
+   * @param ruleNum The rule number
+   */
+  void deleteRuleFromChain(unsigned int ruleNum);
+
+  /**
+   * @brief Retrieve rule from the chain
+   *
+   * @param ruleNum The rule number
+   * @return Rule   The rule object
+   */
+  Rule retrieveRuleFromChain(unsigned int ruleNum);
+
+  /**
+   * @brief Checks whether rule is in chain
+   *
+   * @param ruleNum The rule number
+   * @return true   If the rule is in the cahin
+   * @return false  Otherwise
+   */
+  bool hasRuleInChain(unsigned int ruleNum);
+
+  /**
+   * @brief Get the Size Of Rule Map object
+   *
+   * @return unsigned int The size
+   */
+  unsigned int getSizeOfRuleMap();
+
+ private:
+  RuleMap ruleMap;
+};
+}  // namespace iptables
+#endif  // !CHAIN_HPP
